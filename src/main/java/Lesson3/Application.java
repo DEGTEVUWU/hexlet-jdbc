@@ -27,7 +27,6 @@ public class Application {
         var sql3 = "INSERT INTO users (username, phone) VALUES ('tom', '123')";
         try(Statement statement3 = conn.createStatement()) {
             statement3.executeUpdate(sql3);
-            statement3.close();
         }
 
         String sql4 = "SELECT * FROM users";
@@ -40,6 +39,13 @@ public class Application {
                 System.out.println("next person --->");
                 System.out.println("");
 
+            }
+
+            var sql5 = "INSERT INTO users (username, phone) VALUES (?, ?)";
+            try (var preparedStatement = conn.prepareStatement(sql5)) {
+                preparedStatement.setString(1, "Tommy");
+                preparedStatement.setString(2, "33333333");
+                preparedStatement.executeUpdate();
             }
         }
     }
